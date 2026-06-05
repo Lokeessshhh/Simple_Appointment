@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import Appointment
 from .utils import send_whatsapp_message
 from datetime import datetime
+from django.utils import timezone
 from django.utils.timezone import make_aware
 import logging
 
