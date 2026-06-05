@@ -27,7 +27,8 @@ def index(request):
             
             # Send WhatsApp confirmation
             try:
-                msg_body = f"Hi {name}, your appointment is confirmed for {dt_obj.strftime('%B %d, %Y at %I:%M %p')}."
+                local_dt = timezone.localtime(appointment.appointment_datetime)
+                msg_body = f"Hi {name}, your appointment is confirmed for {local_dt.strftime('%B %d, %Y at %I:%M %p')}."
                 send_whatsapp_message(phone, msg_body)
                 appointment.confirmation_sent = True
                 appointment.save()

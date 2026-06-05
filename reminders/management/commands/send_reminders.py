@@ -26,7 +26,9 @@ class Command(BaseCommand):
         
         for appt in upcoming_appointments:
             try:
-                msg_body = f"Reminder: Hi {appt.customer_name}, you have an appointment coming up at {appt.appointment_datetime.strftime('%I:%M %p')} today."
+                # Convert to local time for the message
+                local_dt = timezone.localtime(appt.appointment_datetime)
+                msg_body = f"Reminder: Hi {appt.customer_name}, you have an appointment coming up at {local_dt.strftime('%I:%M %p')} today."
                 send_whatsapp_message(appt.phone_number, msg_body)
                 
                 appt.reminder_sent = True
